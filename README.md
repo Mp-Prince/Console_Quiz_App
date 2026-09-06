@@ -40,7 +40,7 @@ src/main/java/
 Create a `.env` file in the project root with the SQLite database URL:
 
 ```env
-DATABASE_URL=jdbc:sqlite:/D:/SQLite/Quiz_Database.db
+DATABASE_URL=jdbc:sqlite:/path/to/Quiz_Database.db
 ```
 
 `.env` is ignored by Git because it contains local configuration. Use `.env.example` as a template when setting up the project on another machine.
