@@ -6,7 +6,7 @@ A simple Java console quiz application backed by an SQLite database. The applica
 
 - Java 26 or newer
 - Maven
-- An SQLite database at `D:/SQLite/Quiz_Database.db`
+- An SQLite database configured through `.env`
 
 The database should contain:
 
@@ -37,13 +37,13 @@ src/main/java/
 
 ## Configuration
 
-The SQLite database path is currently defined in `ConnDB.java` as:
+Create a `.env` file in the project root with the SQLite database URL:
 
-```text
-jdbc:sqlite:/D:/SQLite/Quiz_Database.db
+```env
+DATABASE_URL=jdbc:sqlite:/D:/SQLite/Quiz_Database.db
 ```
 
-Update that path in `ConnDB.java` if your database is stored elsewhere.
+`.env` is ignored by Git because it contains local configuration. Use `.env.example` as a template when setting up the project on another machine.
 
 ## License
 

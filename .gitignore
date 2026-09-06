@@ -1,6 +1,9 @@
 # Maven build output
 target/
 
+# Local environment configuration
+.env
+
 # NetBeans
 nbproject/private/
 nbbuild/

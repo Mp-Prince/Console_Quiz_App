@@ -8,13 +8,27 @@ import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 public class ConnDB {
 
+    private final String databaseUrl = loadDatabaseUrl();
+
+    private String loadDatabaseUrl() {
+        Dotenv dotenv = Dotenv.configure()
+                .ignoreIfMissing()
+                .load();
+        String url = dotenv.get("DATABASE_URL");
+        if (url == null || url.isBlank()) {
+            throw new IllegalStateException("DATABASE_URL is missing from the .env file");
+        }
+        return url;
+    }
+
     public void connSQL(){ 
-        String url = "jdbc:sqlite:/D:/SQLite/Quiz_Database.db";
         String listQuery = "SELECT * FROM Category"; 
 
-        try (Connection conn = DriverManager.getConnection(url);
+        try (Connection conn = DriverManager.getConnection(databaseUrl);
              PreparedStatement pstmt = conn.prepareStatement(listQuery);
              ResultSet rs = pstmt.executeQuery();
              Scanner s = new Scanner(System.in)) {
@@ -48,11 +62,10 @@ public class ConnDB {
     }
 
     public void Display(int ID){
-         String url = "jdbc:sqlite:/D:/SQLite/Quiz_Database.db";
         String Qquery = "SELECT * FROM Quiz_qustions WHERE Cate_ID = ?";
         try (
             Scanner sc = new Scanner(System.in);
-            Connection con = DriverManager.getConnection(url);
+            Connection con = DriverManager.getConnection(databaseUrl);
             PreparedStatement psCat = con.prepareStatement(Qquery);
         ){
             psCat.setInt(1, ID);
